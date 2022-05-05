@@ -3,7 +3,7 @@
     <ul>
     {% for Customer in CustomerList %}
         
-          <li><a href="{% url 'WebStore:detail' Customer.CustomerID %}">{{ Customer.CustomerName }}</a></li>
+         <li><a href="{% url 'WebStore:detail' Customer.CustomerID %}">{{ Customer.CustomerName }}</a></li> 
 
     {% endfor %}
     </ul>
