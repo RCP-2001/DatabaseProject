@@ -16,6 +16,8 @@ def detail(request, CustomerID):
 
     return render(request, 'WebStore/detail.html', {'customers':customers})
 
+ 
+
 #def results(request, question_id):
 #    response = "You're looking at the results of question %s."
 #    return HttpResponse(response % question_id)
