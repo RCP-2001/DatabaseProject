@@ -1,6 +1,8 @@
-<h1>{{ customer.customerName }}</h1>
+<h1>{{ customers.CustomerName }}</h1>
 <ul>
-{% for Customer in Customer.CustomerWishList_set.all %}
+   
+{% for CustomerWishList in customers.CustomerWishList_set.all %}
+    <h2> Pog </h2>
     <li>{{ CustomerWishList.Type }}</li>
 {% endfor %}
 </ul>

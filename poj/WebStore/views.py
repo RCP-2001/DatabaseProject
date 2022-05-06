@@ -11,10 +11,10 @@ def index(request):
     }
     return render(request, 'WebStore/index.html', context)
 
-def detail(request, question_id):
-    question = get_object_or_404(Customers, pk=Customers)
+def detail(request, CustomerID):
+    customers = get_object_or_404(Customers, pk=CustomerID)
 
-    return render(request, 'WebStore/detail.html', {'question':question})
+    return render(request, 'WebStore/detail.html', {'customers':customers})
 
 #def results(request, question_id):
 #    response = "You're looking at the results of question %s."

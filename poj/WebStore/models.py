@@ -6,13 +6,13 @@ from django.utils import timezone
 class Customers(models.Model):
     CustomerID = models.IntegerField(primary_key=True)
     CustomerName = models.CharField(max_length=200)
-    OwnsRouter = models.BooleanField()
+    OwnsRouter = models.BooleanField(default=False)
 
 class CustomerWishList(models.Model):
     #WishID = models.IntegerField(primary_key=True)
     CustomerID = models.ForeignKey(Customers, on_delete=models.CASCADE)
     Type = models.CharField(max_length=200)
-    AmmountOfItem = models.IntegerField()
+    AmmountOfItem = models.IntegerField(default=1)
     Price = models.DecimalField(decimal_places=2, max_digits=9)
 
 class WishListPhone(models.Model):
