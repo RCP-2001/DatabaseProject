@@ -1,0 +1,12 @@
+<h1> Customers LETSGO</h1>
+{% if CustomerList %}
+    <ul>
+    {% for Customer in CustomerList %}
+        
+         <li><a href="{% url 'WebStore:detail' Customer.CustomerID %}">{{ Customer.CustomerName }}</a></li> 
+
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}

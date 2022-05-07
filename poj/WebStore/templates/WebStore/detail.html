@@ -2,6 +2,6 @@
 <ul>
    
 {% for CustomerWishList in customers.customerwishlist_set.all %}
-    <li>{{ CustomerWishList.Type }}</li>
+    <li><a href="{% url 'WebStore:WishDetails' CustomerWishList.id  %}" > {{ CustomerWishList.Type }} </a> </li>
 {% endfor %}
 </ul>

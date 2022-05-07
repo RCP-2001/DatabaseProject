@@ -5,8 +5,9 @@ from . import views
 app_name = 'WebStore'
 urlpatterns = [
     path('', views.index, name='index'),
-    #path('3/', views.detail, name='detail'),
-    path('<int:CustomerID>/', views.detail, name='detail'),
+    path('customerLi/', views.CustomerLi, name='customerLi'),
+    path('customers/<int:CustomerID>/', views.detail, name='detail'),
+    path('WishList/<int:WishID>/', views.WishDetails, name='WishDetails')
    # path('<int:question_id>/results/', views.results, name='results'),
    # path('<int:question_id>/vote/', views.vote, name='vote'),
    # path('specifics/<int:question_id>/', views.detail, name='detail'),

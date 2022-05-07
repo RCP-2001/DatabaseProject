@@ -11,12 +11,21 @@ def index(request):
     }
     return render(request, 'WebStore/index.html', context)
 
+def CustomerLi(request):
+    CustomerList = Customers.objects.order_by('-CustomerName')
+    context = {
+        'CustomerList': CustomerList,
+    }
+    return render(request, 'WebStore/Customers.html', context)
+
 def detail(request, CustomerID):
     customers = get_object_or_404(Customers, pk=CustomerID)
 
     return render(request, 'WebStore/detail.html', {'customers':customers})
 
- 
+def WishDetails(request, WishID):
+    Wish = get_object_or_404(CustomerWishList, pk=WishID)
+    return render(request, 'WebStore/WishDetails.html', {'Wish':Wish} )
 
 #def results(request, question_id):
 #    response = "You're looking at the results of question %s."

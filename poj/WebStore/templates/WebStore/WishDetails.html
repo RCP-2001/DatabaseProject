@@ -1,0 +1,31 @@
+<h1>{{ Wish.id }}</h1>
+<h2>{{ Wish.Type }}</h2>
+<ul>
+   
+{% if Wish.Type == "Phone" %}
+    {% for WishListPhone in Wish.wishlistphone_set.all %}
+        <li> Price: {{ Wish.Price }}</li>
+        <li> Ammount: {{ Wish.AmmountOfItem }}</li>
+        <li> Brand: {{ WishListPhone.Brand }}</li>
+        <li> Quality: {{ WishListPhone.Quality }}</li>
+        <li> Generation: {{ WishListPhone.Generation }}</li>
+        <li> CameraQuality: {{ WishListPhone.CameraQuality }}</li>
+        <li> PriorityList: {{ WishListPhone.PriorityList }}</li>
+
+    {% endfor %}
+{% endif %}
+
+{% if Wish.Type == "TV" %}
+    {% for WishListTV in Wish.wishlisttv_set.all %}
+        <li> Price: {{ Wish.Price }}</li>
+        <li> Ammount: {{ Wish.AmmountOfItem }}</li>
+        <li> Brand: {{ WishListTV.Brand }}</li>
+        <li> Hertz: {{ WishListTV.Hertz }}</li>
+        <li> ScreenType: {{ WishListTV.ScreenType }}</li>
+        <li> ScreenSize: {{ WishListTV.ScreemSize }}</li>
+        <li> PriorityList: {{ WishListTV.PriorityList }}</li>
+
+    {% endfor %}
+{% endif %}    
+
+</ul>

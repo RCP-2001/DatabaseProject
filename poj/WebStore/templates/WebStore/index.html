@@ -1,12 +1,5 @@
-<h1> Customers LETSGO</h1>
-{% if CustomerList %}
-    <ul>
-    {% for Customer in CustomerList %}
-        
-         <li><a href="{% url 'WebStore:detail' Customer.CustomerID %}">{{ Customer.CustomerName }}</a></li> 
+<h1> Best Buy</h1>
 
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
+<ul>
+    <a href="{% url 'WebStore:customerLi' %}"> Customers </a>
+</ul>
