@@ -1,0 +1,7 @@
+<h1>{{ venders.Name }}</h1>
+<ul>
+   
+{% for Products in venders.products_set.all %}
+    <li> {{ Products.Description }} </li>
+{% endfor %}
+</ul>

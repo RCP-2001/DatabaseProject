@@ -1,0 +1,12 @@
+<h1> Venders LETSGO</h1>
+{% if VenderList %}
+    <ul>
+    {% for Vender in VenderList %}
+        
+         <li><a href="{% url 'WebStore:VenderDetails' Vender.VenderID %}"> {{ Vender.Name }} </a></li> 
+
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No Venders are available.</p>
+{% endif %}

@@ -2,14 +2,11 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.template import loader
 from django.shortcuts import get_object_or_404, render
-from .models import Customers, CustomerWishList
+from .models import Customers, CustomerWishList, WishListPhone, WishListTV, Vender, Products, Service, InternetServices, PhoneServices, Phones, TVs
 
 def index(request):
-    CustomerList = Customers.objects.order_by('-CustomerName')
-    context = {
-        'CustomerList': CustomerList,
-    }
-    return render(request, 'WebStore/index.html', context)
+
+    return render(request, 'WebStore/index.html')
 
 def CustomerLi(request):
     CustomerList = Customers.objects.order_by('-CustomerName')
@@ -26,6 +23,18 @@ def detail(request, CustomerID):
 def WishDetails(request, WishID):
     Wish = get_object_or_404(CustomerWishList, pk=WishID)
     return render(request, 'WebStore/WishDetails.html', {'Wish':Wish} )
+
+def VendersLi(request):
+    VenderList = Vender.objects.order_by('-Name')
+    context = {
+        'VenderList': VenderList,
+    }
+    return render(request, 'WebStore/Venders.html', context)
+
+def VenderDetails(request, VenderID):
+    venders = get_object_or_404(Vender, pk=VenderID)
+
+    return render(request, 'WebStore/VenderDetails.html', {'venders':venders})
 
 #def results(request, question_id):
 #    response = "You're looking at the results of question %s."
