@@ -41,6 +41,10 @@ def ProductDetails(request, ProductID):
 
     return render(request, 'WebStore/ProductDetails.html', {'product':product})
 
+def ServiceDetails(request, ServiceID):
+    service = get_object_or_404(Service, pk=ServiceID)
+    return render(request, 'WebStore/ServiceDetails.html', {'service':service})
+
 #def results(request, question_id):
 #    response = "You're looking at the results of question %s."
 #    return HttpResponse(response % question_id)

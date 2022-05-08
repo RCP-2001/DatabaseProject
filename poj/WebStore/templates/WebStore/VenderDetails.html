@@ -2,12 +2,27 @@
 <ul>
 
     {% for Products in venders.products_set.all %}
-    <li><a href="{% url 'WebStore:ProductDetails' Products.ProductID %}"> {{ Products.Description }} </a>  </li>
-        <ul>
-            <li>{{ Products.Price }} </li>
-            <li>{{ Products.DeliveryCost }} </li>
-            <li>{{ Products.DeliveryLength }} </li>
-            <li>{{ Products.Type }} </li>
-        </ul>
+    <li><a href="{% url 'WebStore:ProductDetails' Products.ProductID %}"> {{ Products.Description }} </a> </li>
+    <ul>
+        <li>{{ Products.Price }} </li>
+        <li>{{ Products.DeliveryCost }} </li>
+        <li>{{ Products.DeliveryLength }} </li>
+        <li>{{ Products.Type }} </li>
+        <br>
+    </ul>
     {% endfor %}
+    {% for Service in venders.service_set.all %}
+    <li> <a href="{% url 'WebStore:ServiceDetails' Service.ServiceID %}"> {{Service.Name}} </a> </li>
+    <ul>
+        <li> {{Service.Type}} </li>
+        <li> {{Service.Description}} </li>
+        <li> {{Service.SubscriptionPrice }}</li>
+        <li> {{Service.SubscriptionLength}}</li>
+        <li> {{Service.ContractLength }}</li>
+        <li> {{ venders.Name }}</li>
+        <br>
+    </ul>
+
+    {% endfor %}
+
 </ul>

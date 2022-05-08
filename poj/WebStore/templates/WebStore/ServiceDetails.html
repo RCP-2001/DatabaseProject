@@ -1,0 +1,24 @@
+<h1>{{ service.ServiceID }}</h1>
+<h2>{{ service.Description }}</h2>
+<ul>
+   
+{% if service.Type == "Internet" %}
+    {% for InternetServices in service.internetservices_set.all %}
+        <li> Speed: {{ InternetServices.Speed }}</li>
+        <li> Cap: {{ InternetServices.DataCap }}</li>
+        <li> IncludesRouter: {{ InternetServices.IncludesRouter }}</li>
+        <br><br><br>
+    {% endfor %}
+{% endif %}
+
+{% if service.Type == "phone" %}
+    {% for TVs in Wish.tvs_set.all %}
+        <li> Brand: {{ TVs.Brand }}</li>
+        <li> Hertz: {{ TVs.Hertz }}</li>
+        <li> ScreenType: {{ TVs.ScreenType }}</li>
+        <li> ScreenSize: {{ TVs.ScreemSize }}</li>
+
+    {% endfor %}
+{% endif %}    
+
+</ul>
