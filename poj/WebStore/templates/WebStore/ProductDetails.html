@@ -1,0 +1,25 @@
+<h1>{{ product.ProductID }}</h1>
+<h2>{{ product.Description }}</h2>
+<ul>
+   
+{% if product.Type == "Phone" %}
+    {% for Phones in product.phones_set.all %}
+        <li> Brand: {{ Phones.Brand }}</li>
+        <li> Quality: {{ Phones.Quality }}</li>
+        <li> Generation: {{ Phones.Generation }}</li>
+        <li> CameraQuality: {{ Phones.CameraQuality }}</li>
+
+    {% endfor %}
+{% endif %}
+
+{% if product.Type == "TV" %}
+    {% for TVs in Wish.tvs_set.all %}
+        <li> Brand: {{ TVs.Brand }}</li>
+        <li> Hertz: {{ TVs.Hertz }}</li>
+        <li> ScreenType: {{ TVs.ScreenType }}</li>
+        <li> ScreenSize: {{ TVs.ScreemSize }}</li>
+
+    {% endfor %}
+{% endif %}    
+
+</ul>
