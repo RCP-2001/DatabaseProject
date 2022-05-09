@@ -45,6 +45,27 @@ def ServiceDetails(request, ServiceID):
     service = get_object_or_404(Service, pk=ServiceID)
     return render(request, 'WebStore/ServiceDetails.html', {'service':service})
 
+def AddCustomer(request):
+    CustomerList = Customers.objects.order_by('-CustomerName')
+    context = {
+        'CustomerList': CustomerList,
+    }
+    name = request.POST['CusName']
+    Router = request.POST['router']
+
+ #   try:
+ #       Router = request.POST['router']
+
+ #   except(KeyError):
+ #       return(request, 'WebStore/Customers.html', context)
+  #  else:
+   #     Cust= Customers(CustomerName=name, OwnsRouter=Router)
+    #    cust.Save()
+    
+    #return HttoResponseRedirect(reverse('WebStore/Cutomers.html', context))
+    
+    return render(request, 'WebStore/AddCustomer.html', {'router':Router} )
+
 #def results(request, question_id):
 #    response = "You're looking at the results of question %s."
 #    return HttpResponse(response % question_id)

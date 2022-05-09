@@ -5,7 +5,8 @@ from . import views
 app_name = 'WebStore'
 urlpatterns = [
     path('', views.index, name='index'),
-    path('customerLi/', views.CustomerLi, name='customerLi'),
+    path('customers/', views.CustomerLi, name='customerLi'),
+    path('customers/add/', views.AddCustomer, name='AddCustomer'),
     path('customers/<int:CustomerID>/', views.detail, name='detail'),
     path('WishList/<int:WishID>/', views.WishDetails, name='WishDetails'),
     path('VenderLi/', views.VendersLi, name='VenderLi'),

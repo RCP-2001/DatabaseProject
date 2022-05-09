@@ -8,6 +8,9 @@ class Customers(models.Model):
     CustomerName = models.CharField(max_length=200)
     OwnsRouter = models.BooleanField(default=False)
 
+
+  
+
 class CustomerWishList(models.Model):
     #WishID = models.IntegerField(primary_key=True)
     CustomerID = models.ForeignKey(Customers, on_delete=models.CASCADE)

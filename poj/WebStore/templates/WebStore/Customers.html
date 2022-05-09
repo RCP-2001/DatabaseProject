@@ -9,4 +9,19 @@
     </ul>
 {% else %}
     <p>No polls are available.</p>
+
 {% endif %}
+
+<p>Add user:</p>
+
+<form action="{% url 'WebStore:AddCustomer' %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend><h1>Add New Customer </h1></legend>
+        {% if error_message %}<p><strong> {{error_message}} </strong> </p> {% endif %}
+        <p>Name: <input  type="text" name="CusName" value="Test" > </p>
+        <input type="checkbox" name="router" id="r"><label for="r"> Do you own a router?</label></p>
+
+    </fieldset>
+    <input type="submit" value="Submit">
+</form>
