@@ -10,3 +10,19 @@
 {% else %}
     <p>No Venders are available.</p>
 {% endif %}
+
+
+<form action="{% url 'WebStore:AddVender' %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend>
+            <h1>Add New Vender </h1>
+        </legend>
+        {% if error_message %}<p><strong> {{error_message}} </strong> </p> {% endif %}
+
+        <p>Name: <input type="text" name="VenName" value="Test"> </p>
+
+
+    </fieldset>
+    <input type="submit" value="Submit">
+</form>

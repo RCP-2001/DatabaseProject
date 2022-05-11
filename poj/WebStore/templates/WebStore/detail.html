@@ -1,7 +1,25 @@
 <h1>{{ customers.CustomerName }}</h1>
 <ul>
-   
-{% for CustomerWishList in customers.customerwishlist_set.all %}
-    <li><a href="{% url 'WebStore:WishDetails' CustomerWishList.id  %}" > {{ CustomerWishList.Type }} </a> </li>
-{% endfor %}
+    <h2>Current Wish List</h2>
+    {% for CustomerWishList in customers.customerwishlist_set.all %}
+    <li><a href="{% url 'WebStore:WishDetails' CustomerWishList.id  %}"> {{ CustomerWishList.Type }} </a> </li>
+
+    {% endfor %}
 </ul>
+<form action="{% url 'WebStore:NewWishList' customers.CustomerID %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend>
+            <h1>Add New Customer </h1>
+        </legend>
+        {% if error_message %}<p><strong> {{error_message}} </strong> </p> {% endif %}
+
+        <label for="Type"> Type</label> <select name="Type">
+            <option value="Phone"> Phone </option>
+            <option value="TVs"> TVs </option>
+        </select>
+        <p>Ammount of Item <input type="number" name="AmmountOfItem"> </p>
+        <p>Price <input type="number" name="Price"> </p>
+
+        <input type="submit" value="Submit">
+</form>

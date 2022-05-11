@@ -8,6 +8,8 @@
         <li>{{ Products.DeliveryCost }} </li>
         <li>{{ Products.DeliveryLength }} </li>
         <li>{{ Products.Type }} </li>
+        <li> {{ venders.Name }}</li>
+
         <br>
     </ul>
     {% endfor %}
@@ -26,3 +28,23 @@
     {% endfor %}
 
 </ul>
+<form action="{% url 'WebStore:AddProducts' venders.VenderID %}" method="post">
+    {% csrf_token %}
+<fieldset>
+    <legend>
+        <h1>Add New Product </h1>
+    </legend>
+    {% if error_message %}<p><strong> {{error_message}} </strong> </p> {% endif %}
+
+    <label for="Type"> Type</label> <select name="Type">
+        <option value="Phone"> Phone </option>
+        <option value="TVs"> TVs </option>
+    </select>
+    <p>Price <input type="number" name="Price"> </p>    
+    <p>Description <input type="text" name="Description"> </p>
+    <p>DeliveryCost <input type="number" name="DeliveryCost"> </p>
+    <p>DeliveryLength <input type="number" name="DeliveryLength"> </p>
+
+    <input type="submit" value="Submit">
+
+</form>

@@ -1,25 +1,65 @@
 <h1>{{ product.ProductID }}</h1>
 <h2>{{ product.Description }}</h2>
+<h3>{{ product.Type }}</h3>
 <ul>
-   
-{% if product.Type == "Phone" %}
+
+    {% if product.Type == "Phone" %}
     {% for Phones in product.phones_set.all %}
-        <li> Brand: {{ Phones.Brand }}</li>
-        <li> Quality: {{ Phones.Quality }}</li>
-        <li> Generation: {{ Phones.Generation }}</li>
-        <li> CameraQuality: {{ Phones.CameraQuality }}</li>
+    <li> Brand: {{ Phones.Brand }}</li>
+    <li> Quality: {{ Phones.Quality }}</li>
+    <li> Generation: {{ Phones.Generation }}</li>
+    <li> CameraQuality: {{ Phones.CameraQuality }}</li>
+
+    <br><br>
 
     {% endfor %}
-{% endif %}
 
-{% if product.Type == "TV" %}
-    {% for TVs in Wish.tvs_set.all %}
-        <li> Brand: {{ TVs.Brand }}</li>
-        <li> Hertz: {{ TVs.Hertz }}</li>
-        <li> ScreenType: {{ TVs.ScreenType }}</li>
-        <li> ScreenSize: {{ TVs.ScreemSize }}</li>
+    <form action="{% url 'WebStore:UpdatePhone' product.ProductID %}" method="post">
+        {% csrf_token %}
+        <fieldset>
+            <legend>
+                <h1>UpdatePhone </h1>
+            </legend>
+            {% if error_message %}<p><strong> {{error_message}} </strong> </p> {% endif %}
+
+            </select>
+            <p>Brand <input type="text" name="Brand"> </p>
+            <p>Quality <input type="text" name="Quality"> </p>
+            <p>Generation <input type="number" name="Generation"> </p>
+            <p>CameraQuality <input type="number" name="CameraQuality"> </p>
+
+            <input type="submit" value="Submit">
+
+    </form>
+    {% endif %}
+
+    {% if product.Type == "TVs" %}
+    {% for TVs in product.tvs_set.all %}
+    <li> Brand: {{ TVs.Brand }}</li>
+    <li> Hertz: {{ TVs.Hertz }}</li>
+    <li> ScreenType: {{ TVs.ScreenType }}</li>
+    <li> ScreenSize: {{ TVs.ScreemSize }}</li>
 
     {% endfor %}
-{% endif %}    
+
+
+    <form action="{% url 'WebStore:UpdateTVs' product.ProductID %}" method="post">
+        {% csrf_token %}
+        <fieldset>
+            <legend>
+                <h1>UpdateScreen </h1>
+            </legend>
+            {% if error_message %}<p><strong> {{error_message}} </strong> </p> {% endif %}
+
+            </select>
+            <p>Brand <input type="text" name="Brand"> </p>
+            <p>Hertz <input type="number" name="Hertz"> </p>
+            <p>ScreenType <input type="text" name="ScreenType"> </p>
+            <p>ScreenSize <input type="number" name="ScreenSize"> </p>
+
+            <input type="submit" value="Submit">
+
+    </form>
+    {% endif %}
 
 </ul>

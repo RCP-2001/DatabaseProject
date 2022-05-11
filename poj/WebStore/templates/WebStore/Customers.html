@@ -1,14 +1,14 @@
 <h1> Customers LETSGO</h1>
 {% if CustomerList %}
-    <ul>
+<ul>
     {% for Customer in CustomerList %}
-        
-         <li><a href="{% url 'WebStore:detail' Customer.CustomerID %}">{{ Customer.CustomerName }}</a></li> 
+
+    <li><a href="{% url 'WebStore:detail' Customer.CustomerID %}">{{ Customer.CustomerName }}</a></li>
 
     {% endfor %}
-    </ul>
+</ul>
 {% else %}
-    <p>No polls are available.</p>
+<p>No polls are available.</p>
 
 {% endif %}
 
@@ -17,11 +17,18 @@
 <form action="{% url 'WebStore:AddCustomer' %}" method="post">
     {% csrf_token %}
     <fieldset>
-        <legend><h1>Add New Customer </h1></legend>
+        <legend>
+            <h1>Add New Customer </h1>
+        </legend>
         {% if error_message %}<p><strong> {{error_message}} </strong> </p> {% endif %}
-        <p>Name: <input  type="text" name="CusName" value="Test" > </p>
-        <input type="checkbox" name="router" id="r"><label for="r"> Do you own a router?</label></p>
 
+        <p>Name: <input type="text" name="CusName" value="Test"> </p>
+
+        <p>Do You own a router?</p>
+        <input type="radio" name="router" id="True" value="True">
+        <label for="router">Yes</label><br>
+        <input type="radio" name="router" id="False" value="False">
+        <label for="router">No</label><br>
     </fieldset>
     <input type="submit" value="Submit">
 </form>

@@ -1,7 +1,8 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.template import loader
 from django.shortcuts import get_object_or_404, render
+from django.urls import reverse
 from .models import Customers, CustomerWishList, WishListPhone, WishListTV, Vender, Products, Service, InternetServices, PhoneServices, Phones, TVs
 
 def index(request):
@@ -49,27 +50,76 @@ def AddCustomer(request):
     CustomerList = Customers.objects.order_by('-CustomerName')
     context = {
         'CustomerList': CustomerList,
+        'error_message': "Select Router"
     }
     name = request.POST['CusName']
-    Router = request.POST['router']
 
- #   try:
- #       Router = request.POST['router']
+    try:
+        router = request.POST["router"]
+    except(KeyError):
+        return render(request, 'WebStore/Customers.html', context)
+    else:
+        Cust = Customers(CustomerName = name, OwnsRouter=router)
+        Cust.save()
+        return HttpResponseRedirect(reverse('WebStore:customerLi'))
 
- #   except(KeyError):
- #       return(request, 'WebStore/Customers.html', context)
-  #  else:
-   #     Cust= Customers(CustomerName=name, OwnsRouter=Router)
-    #    cust.Save()
-    
-    #return HttoResponseRedirect(reverse('WebStore/Cutomers.html', context))
-    
-    return render(request, 'WebStore/AddCustomer.html', {'router':Router} )
+def NewWishList(request, CID):
+    customers = get_object_or_404(Customers, pk=CID)
+    wType = request.POST['Type']
+    wAmmountOfItem = request.POST['AmmountOfItem']
+    wPrice = request.POST['Price']
+    w = CustomerWishList(CustomerID=customers, Type=wType, AmmountOfItem = wAmmountOfItem, Price = wPrice)
+    w.save()
+    return HttpResponseRedirect(reverse('WebStore:detail', args=(CID,)))
 
-#def results(request, question_id):
-#    response = "You're looking at the results of question %s."
-#    return HttpResponse(response % question_id)
+def AddVender(request):
+    VenderList = Vender.objects.order_by('Name')
+    context = {
+        'VenderList': VenderList,
+        'error_message': "Somethign went wrong"
+    }
+    name = request.POST['VenName']
+    V = Vender(Name=name)
+    V.save()
 
-#def vote(request, question_id):
-#    return HttpResponse("You're voting on question %s." % question_id)
+    return HttpResponseRedirect(reverse('WebStore:VenderLi'))
+
+def AddProducts(request, VID):
+    venders = get_object_or_404(Vender, pk=VID)
+    wDesc = request.POST['Description']
+    wPrice = request.POST['Price']
+    wDeliveryCost = request.POST['DeliveryCost']
+    wDeliveryLength = request.POST['DeliveryLength']
+    wType = request.POST['Type']
+
+    p = Products(Description = wDesc, Price = wPrice, DeliveryCost = wDeliveryCost, DeliveryLength = wDeliveryLength, Type = wType, VenderID=venders)
+    p.save()
+    return HttpResponseRedirect(reverse('WebStore:VenderDetails', args=(VID,)))
+
+def UpdatePhone(request, PID):
+    Prod = get_object_or_404(Products, pk = PID)
+
+    wBrand = request.POST['Brand']
+    wQuality = request.POST['Quality']
+    wGeneration = request.POST['Generation']
+    wCameraQuality = request.POST['CameraQuality']
+
+    p = Phones(ProductID = Prod, Brand = wBrand, Quality = wQuality, Generation = wGeneration, CameraQuality = wCameraQuality)
+    p.save()
+
+    return HttpResponseRedirect(reverse('WebStore:ProductDetails', args=(PID,)))
+
+
+def UpdateTVs(request, PID):
+    Prod = get_object_or_404(Products, pk = PID)
+
+    wBrand = request.POST['Brand']
+    wHertz = request.POST['Hertz']
+    wScreenType = request.POST['ScreenType']
+    wScreenSize = request.POST['ScreenSize']
+
+    p = TVs(ProductID = Prod, Brand = wBrand, Hertz = wHertz, ScreenSize = wScreenSize, ScreenType = wScreenType)
+    p.save()
+
+    return HttpResponseRedirect(reverse('WebStore:ProductDetails', args=(PID,)))
 
